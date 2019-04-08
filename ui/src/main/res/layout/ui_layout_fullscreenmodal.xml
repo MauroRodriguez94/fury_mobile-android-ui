@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/ui_fullscreenmodal_appbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/ui_fullscreenmodal_appbarlayout_height"
         android:fitsSystemWindows="true">
@@ -44,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/ui_components_white_color"
                 android:gravity="center"
-                android:orientation="vertical" />
+                android:orientation="vertical"/>
             <Button
                 android:id="@+id/ui_fullscreenmodal_secondary_exit_button"
                 android:layout_width="match_parent"
@@ -63,4 +64,14 @@
                 android:visibility="gone"/>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
+
+    <View
+        android:id="@+id/ui_fullscreenmodal_toolbar_shadow"
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        app:layout_scrollFlags="scroll"
+        android:layout_height="32dp"
+        android:background="@drawable/ui_shadow_fullscreenmodal"
+        app:layout_anchor="@id/ui_fullscreenmodal_toolbar"
+        app:layout_anchorGravity="bottom"/>
 </android.support.design.widget.CoordinatorLayout>
