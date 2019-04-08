@@ -150,7 +150,10 @@ public abstract class FullScreenModal extends DialogFragment {
         });
 
         toolbar.setTitle(getTitle());
+        setUpToolbarShadow();
+    }
 
+    private void setUpToolbarShadow() {
         final AppBarLayout appBar = root.findViewById(R.id.ui_fullscreenmodal_appbar);
         final View shadow = root.findViewById(R.id.ui_fullscreenmodal_toolbar_shadow);
         appBar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
