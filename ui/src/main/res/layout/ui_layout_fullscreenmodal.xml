@@ -73,5 +73,6 @@
         android:layout_height="32dp"
         android:background="@drawable/ui_shadow_fullscreenmodal"
         app:layout_anchor="@id/ui_fullscreenmodal_toolbar"
-        app:layout_anchorGravity="bottom"/>
+        app:layout_anchorGravity="bottom"
+        android:visibility="gone"/>
 </android.support.design.widget.CoordinatorLayout>

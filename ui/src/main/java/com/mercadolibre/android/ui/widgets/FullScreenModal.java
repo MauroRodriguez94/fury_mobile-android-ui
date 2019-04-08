@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -149,6 +150,19 @@ public abstract class FullScreenModal extends DialogFragment {
         });
 
         toolbar.setTitle(getTitle());
+
+        final AppBarLayout appBar = root.findViewById(R.id.ui_fullscreenmodal_appbar);
+        final View shadow = root.findViewById(R.id.ui_fullscreenmodal_toolbar_shadow);
+        appBar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int offset) {
+                if (Math.abs(offset) == appBarLayout.getTotalScrollRange()) {
+                    shadow.setVisibility(View.VISIBLE);
+                } else {
+                    shadow.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 
     /**
