@@ -40,9 +40,6 @@ Check out the [wiki](https://github.com/mercadolibre/fury_mobile-android-ui/wiki
 
 ## How to make a local publish
 ```
-./gradlew :ui_legacy:build
-./gradlew :ui:build
-./gradlew :ui_legacy:publishToMavenLocal
-./gradlew :ui:publishToMavenLocal
+./gradlew build publishToMavenLocal
 ```
 Pro tip: first change the version name in ```gradle.properties``` to ```X.XX.X-LOCAL```
