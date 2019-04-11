@@ -9,14 +9,10 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.SystemClock;
 import android.support.design.widget.TextInputLayout;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.view.Gravity;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -51,7 +47,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -418,35 +413,6 @@ public class TextFieldTest {
         assertFalse(container.isFocusableInTouchMode());
         assertFalse(container.isEnabled());
         assertFalse(container.isCounterEnabled());
-    }
-
-    @Test
-    public void testOnTouch_shouldOpenKeyboard() {
-        Context context = spy(this.context);
-        InputMethodManager imm = mock(InputMethodManager.class);
-
-        doReturn(imm).when(context).getSystemService(Context.INPUT_METHOD_SERVICE);
-        doReturn(true).when(imm).showSoftInput(any(View.class), anyInt());
-
-        final long downTime = SystemClock.uptimeMillis();
-        final long eventTime = SystemClock.uptimeMillis() + 100;
-        final float x = 0.0f;
-        final float y = 0.0f;
-        // List of meta states found here: developer.android.com/reference/android/view/KeyEvent.html#getMetaState()
-        final int metaState = 0;
-        final MotionEvent motionEvent = MotionEvent.obtain(
-                downTime,
-                eventTime,
-                MotionEvent.ACTION_UP,
-                x,
-                y,
-                metaState
-        );
-
-        final TextField spyTextField = new TextField(context);
-        spyTextField.getEditText().dispatchTouchEvent(motionEvent);
-
-        verify(imm).showSoftInput(any(View.class), anyInt());
     }
 
     @Test

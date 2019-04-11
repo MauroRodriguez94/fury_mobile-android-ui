@@ -28,10 +28,8 @@ import android.util.AttributeSet;
 import android.util.SparseArray;
 import android.util.TypedValue;
 import android.view.Gravity;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -43,7 +41,6 @@ import com.mercadolibre.android.ui.font.TypefaceHelper;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-import static android.content.Context.INPUT_METHOD_SERVICE;
 import static com.mercadolibre.android.ui.widgets.TextField.type.CENTER;
 import static com.mercadolibre.android.ui.widgets.TextField.type.LEFT;
 import static java.lang.Integer.MAX_VALUE;
@@ -160,8 +157,6 @@ public final class TextField extends LinearLayout {
         initDefaults(context, a);
 
         a.recycle();
-
-
     }
 
     private void initDefaults(@NonNull final Context context, @NonNull final TypedArray a) {
@@ -231,14 +226,6 @@ public final class TextField extends LinearLayout {
 
         setHelper(helperText);
 
-        input.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(final View arg0, final MotionEvent arg1) {
-                showSoftKeyboard();
-                return false;
-            }
-        });
-
         input.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(final CharSequence s, final int start, final int count, final int after) {
@@ -287,8 +274,8 @@ public final class TextField extends LinearLayout {
         } else {
             label.setText(labelText);
             label.setVisibility(View.VISIBLE);
+            setHintAnimationEnabled(false);
         }
-        setHintAnimationEnabled(textIsEmpty);
 
         final LinearLayout.LayoutParams params =
                 (LinearLayout.LayoutParams) label.getLayoutParams();
@@ -562,15 +549,6 @@ public final class TextField extends LinearLayout {
     }
 
     /**
-     * Check if the view is focused
-     *
-     * @return true if the view is focused, false otherwise
-     */
-    public boolean isFocused() {
-        return super.isFocused() || input.isFocused() || container.isFocused();
-    }
-
-    /**
      * Adds a TextWatcher to the list of those whose methods are called
      * whenever this TextView's text changes.
      *
@@ -813,16 +791,6 @@ public final class TextField extends LinearLayout {
             container.setEnabled(false);
             setCharactersCountVisible(false);
             setError(null);
-        }
-    }
-
-    /**
-     * Shows the soft keyboard
-     */
-    /* default */ void showSoftKeyboard() {
-        if (isEnabled()) {
-            ((InputMethodManager) getContext().getSystemService(INPUT_METHOD_SERVICE))
-                    .showSoftInput(this, InputMethodManager.SHOW_IMPLICIT);
         }
     }
 
