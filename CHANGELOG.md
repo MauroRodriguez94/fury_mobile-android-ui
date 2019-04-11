@@ -1,4 +1,5 @@
 # v5.11.0
+## Agregado
 - Se agrega dialogo que se muestra en pantalla completa y con nuevo estilo
 
 # v5.10.0
