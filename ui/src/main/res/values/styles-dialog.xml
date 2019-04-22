@@ -28,4 +28,6 @@
         <item name="android:windowEnterAnimation">@anim/ui_fullscreenmodal_in</item>
         <item name="android:windowExitAnimation">@anim/ui_fullscreenmodal_out</item>
     </style>
+    <style name="NoneFullscreenModalAnimation">
+    </style>
 </resources>

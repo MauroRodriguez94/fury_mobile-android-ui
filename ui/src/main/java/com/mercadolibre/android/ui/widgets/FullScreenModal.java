@@ -3,6 +3,7 @@ package com.mercadolibre.android.ui.widgets;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -51,10 +52,33 @@ public abstract class FullScreenModal extends DialogFragment {
         contentContainer = root.findViewById(R.id.ui_fullscreenmodal_content_container);
         setupView(root);
         if (shouldAnimate()) {
-            getDialog().getWindow().getAttributes().windowAnimations = R.style.FullscreenModalAnimation;
+            getDialog().getWindow().setWindowAnimations(R.style.FullscreenModalAnimation);
         }
 
         return root;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        if (shouldAnimate() && getDialog() != null) {
+            getDialog().getWindow().setWindowAnimations(R.style.NoneFullscreenModalAnimation);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (shouldAnimate() && getDialog() != null) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    getDialog().getWindow().setWindowAnimations(R.style.FullscreenModalAnimation);
+                }
+            }, getContext().getResources().getInteger(R.integer.ui_anim_time));
+        }
     }
 
     @Override

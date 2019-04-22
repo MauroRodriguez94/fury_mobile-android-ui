@@ -3,5 +3,6 @@
 
     <integer name="ui_spinner_rotation_time">2000</integer>
     <integer name="ui_spinner_spinning_time">750</integer>
+    <integer name="ui_anim_time">400</integer>
 
 </resources>
