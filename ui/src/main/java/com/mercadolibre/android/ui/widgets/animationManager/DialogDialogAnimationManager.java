@@ -11,7 +11,7 @@ public class DialogDialogAnimationManager implements DialogAnimationEvents {
     private DialogFragment dialogFragment;
     private int animations;
     private int animationDuration;
-    private static final int defaultAnimation = R.style.NoneFullscreenModalAnimation;
+    private static final int defaultAnimation = R.style.DefaultModalAnimation;
 
     public DialogDialogAnimationManager(@NonNull DialogFragment dialogFragment, @StyleRes int animations, int animationDuration) {
         this.dialogFragment = dialogFragment;
