@@ -3,6 +3,7 @@ package com.mercadolibre.android.ui.widgets.animationManager;
 import android.os.Handler;
 import android.support.annotation.IntegerRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.StyleRes;
 import android.support.v4.app.DialogFragment;
 
 import com.mercadolibre.android.ui.R;
@@ -13,7 +14,7 @@ public class DialogDialogAnimationManager implements DialogAnimationEvents {
     private int animationDuration;
     private static final int defaultAnimation = R.style.NoneFullscreenModalAnimation;
 
-    public DialogDialogAnimationManager(@NonNull DialogFragment dialogFragment, @IntegerRes int animations, int animationDuration) {
+    public DialogDialogAnimationManager(@NonNull DialogFragment dialogFragment, @StyleRes int animations, int animationDuration) {
         this.dialogFragment = dialogFragment;
         this.animations = animations;
         this.animationDuration = animationDuration;
