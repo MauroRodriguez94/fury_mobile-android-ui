@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.mercadolibre.android.ui.R;
-import com.mercadolibre.android.ui.widgets.animationManager.AnimationManager;
+import com.mercadolibre.android.ui.widgets.animationManager.DialogDialogAnimationManager;
 
 /**
  * Base class for Meradolibre's full screen modals
@@ -32,7 +32,7 @@ public abstract class FullScreenModal extends DialogFragment {
     private ViewGroup contentContainer;
     /* default */ Button secondaryExitButton;
     /* default */ View closeButton;
-    private AnimationManager animationManager;
+    private DialogDialogAnimationManager dialogAnimationManager;
     private final static String EMPTY_TITLE = "";
 
     @Override
@@ -51,10 +51,10 @@ public abstract class FullScreenModal extends DialogFragment {
                                    @Nullable final Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.ui_layout_fullscreenmodal, container, false);
         contentContainer = root.findViewById(R.id.ui_fullscreenmodal_content_container);
-        animationManager = new AnimationManager(this, R.style.FullscreenModalAnimation, getContext().getResources().getInteger(R.integer.ui_anim_time));
+        dialogAnimationManager = new DialogDialogAnimationManager(this, R.style.FullscreenModalAnimation, getContext().getResources().getInteger(R.integer.ui_anim_time));
         setupView(root);
         if (shouldAnimate()) {
-            animationManager.onCreateView();
+            dialogAnimationManager.onCreateView();
         }
 
         return root;
@@ -65,7 +65,7 @@ public abstract class FullScreenModal extends DialogFragment {
         super.onStop();
 
         if (shouldAnimate()) {
-            animationManager.onStop();
+            dialogAnimationManager.onStop();
         }
     }
 
@@ -74,7 +74,7 @@ public abstract class FullScreenModal extends DialogFragment {
         super.onResume();
 
         if (shouldAnimate()) {
-            animationManager.onResume();
+            dialogAnimationManager.onResume();
         }
     }
 
