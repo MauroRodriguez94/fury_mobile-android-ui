@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.mercadolibre.android.ui.R;
+import com.mercadolibre.android.ui.widgets.animationManager.AnimationManager;
 
 /**
  * Base class for Meradolibre's full screen modals
@@ -32,6 +33,7 @@ public abstract class FullScreenModal extends DialogFragment {
     private ViewGroup contentContainer;
     /* default */ Button secondaryExitButton;
     /* default */ View closeButton;
+    private AnimationManager animationManager;
     private final static String EMPTY_TITLE = "";
 
     @Override
@@ -50,9 +52,10 @@ public abstract class FullScreenModal extends DialogFragment {
                                    @Nullable final Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.ui_layout_fullscreenmodal, container, false);
         contentContainer = root.findViewById(R.id.ui_fullscreenmodal_content_container);
+        animationManager = new AnimationManager(this, R.style.FullscreenModalAnimation, getContext().getResources().getInteger(R.integer.ui_anim_time));
         setupView(root);
         if (shouldAnimate()) {
-            getDialog().getWindow().setWindowAnimations(R.style.FullscreenModalAnimation);
+            animationManager.onCreateView();
         }
 
         return root;
@@ -62,8 +65,8 @@ public abstract class FullScreenModal extends DialogFragment {
     public void onStop() {
         super.onStop();
 
-        if (shouldAnimate() && getDialog() != null) {
-            getDialog().getWindow().setWindowAnimations(R.style.NoneFullscreenModalAnimation);
+        if (shouldAnimate()) {
+            animationManager.onStop();
         }
     }
 
@@ -71,13 +74,8 @@ public abstract class FullScreenModal extends DialogFragment {
     public void onResume() {
         super.onResume();
 
-        if (shouldAnimate() && getDialog() != null) {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    getDialog().getWindow().setWindowAnimations(R.style.FullscreenModalAnimation);
-                }
-            }, getContext().getResources().getInteger(R.integer.ui_anim_time));
+        if (shouldAnimate()) {
+            animationManager.onResume();
         }
     }
 
