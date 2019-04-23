@@ -1,5 +1,6 @@
 package com.mercadolibre.android.ui.widgets;
 
+import android.content.Context;
 import android.view.View;
 
 import com.mercadolibre.android.ui.R;
@@ -18,6 +19,15 @@ public class DummyFullScreenModal extends FullScreenModal {
     @Override
     public int getContentView() {
         return R.layout.ui_layout_melidialog_test;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        try {
+            super.onAttach(context);
+        } catch (Exception e) {
+            //do nothing
+        }
     }
 
     @Override
